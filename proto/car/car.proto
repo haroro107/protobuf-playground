@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "buf/validate/validate.proto";
+import "github.com/bufbuild/protovalidate-go";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "my-protobuf/protogen/car";
+
+message Car {
+  uint64 id = 10 [(buf.validate.field).uint64.gt = 999];
+  google.protobuf.Timestamp purchase_date = 2;
+  google.protobuf.Timestamp delivery_date = 3;
+  
+  string price = 4 [(buf.validate.field).cel = {
+    id: "transaction.price",
+    message: "price must be positive and include a valid currency symbol ($ or £)",
+    expression: "(this.startsWith('$') || this.startsWith('£')) && double(this.substring(1)) > 0"
+  }];
+
+  option (buf.validate.message).cel = {
+    id: "transaction.delivery_date",
+    message: "delivery date must be after purchase date",
+    expression: "this.delivery_date > this.purchase_date"
+  };
+}

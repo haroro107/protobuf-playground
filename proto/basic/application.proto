@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package the.basic;
+
+option go_package = "my-protobuf/protogen/basic";
+
+message Application {
+  string name = 1;
+  string version = 2;
+  repeated string platforms = 3;
+}

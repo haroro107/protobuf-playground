@@ -1,0 +1,28 @@
+# Binaries
+basic/*.exe
+basic/*.exe~
+basic/*.dll
+basic/*.so
+basic/*.dylib
+
+# Dependency directories
+vendor/
+
+# Generated files
+proto/**/*.pb.go
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# IDE settings
+.vscode/
+.idea/
+
+# Backup files
+# proto/**/*.backup
+
+# Go modules
+go.sum
